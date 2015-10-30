@@ -35,6 +35,8 @@ public class CompletableFeatureExample {
 		// only Spanish are allowed
 		return CompletableFuture.supplyAsync(() -> {
 			// big task with back end dependencies
+			
+			System.out.println("Checking land...");
 			sleep();
 
 			return "spain".equals(land);
@@ -44,6 +46,8 @@ public class CompletableFeatureExample {
 	private CompletableFuture<Boolean> checkLogin(String login, String password) {
 		return CompletableFuture.supplyAsync(() -> {
 			// very hard authentication process
+			
+			System.out.println("Checking pass...");
 			sleep();
 			return login != null && password != null;
 		});
@@ -51,7 +55,7 @@ public class CompletableFeatureExample {
 
 	private static void sleep() {
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
