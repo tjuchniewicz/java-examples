@@ -54,11 +54,16 @@ class USB {
 
 public class OptionalExample {
 
+	
+	private static void processUSB(USB usb) {
+		System.out.println(usb);
+	}
+	
 	public static void main(String[] args) {
 		
 		
 		Optional<USB> maybeUSB = Optional.of(new USB("3.0"));
-		maybeUSB.filter(usb -> "3.0".equals(usb.getVersion())).ifPresent(System.out::println);
+		maybeUSB.filter(usb -> "3.0".equals(usb.getVersion())).ifPresent(OptionalExample::processUSB);
 		
 	
 		Optional<Computer> computer1 = Optional.of(new Computer());
