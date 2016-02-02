@@ -20,6 +20,7 @@ public class StreamSortExample {
 		objects.add(new ObjectVO("Andy", 50));
 		objects.add(new ObjectVO("Andy", 55));
 		objects.add(new ObjectVO("Frank", 70));
+		objects.add(new ObjectVO("Frank", null));
 
 		System.out.println("(1) by name");
 		objects.stream().sorted(Comparator.comparing(ObjectVO::getName)).forEach(System.out::println);
@@ -30,27 +31,34 @@ public class StreamSortExample {
 		System.out.println();
 		
 		System.out.println("(3) by name and then age");
-		objects.stream().sorted(Comparator.comparing(ObjectVO::getName).thenComparing(ObjectVO::getAge))
+		objects.stream()
+				.sorted(
+						Comparator.comparing(ObjectVO::getName, Comparator.nullsFirst(Comparator.naturalOrder()))
+						.thenComparing(ObjectVO::getAge, Comparator.nullsFirst(Comparator.naturalOrder())))
 				.forEach(System.out::println);
 		System.out.println();
 
 		System.out.println("(4) by name and then age reversed");
-		objects.stream().sorted(Comparator.comparing(ObjectVO::getName, Comparator.naturalOrder()).thenComparing(ObjectVO::getAge, Comparator.reverseOrder()))
+		objects.stream()
+				.sorted(Comparator.comparing(ObjectVO::getName, Comparator.nullsFirst(Comparator.naturalOrder()))
+						.thenComparing(ObjectVO::getAge, Comparator.nullsFirst(Comparator.reverseOrder())))
 				.forEach(System.out::println);
 		System.out.println();
 		
 		System.out.println("(5) by (name and then age) and then all reversed");
 		objects.stream()
-				.sorted(Comparator.comparing(ObjectVO::getName).thenComparing(ObjectVO::getAge).reversed())
+				.sorted(
+						Comparator.comparing(ObjectVO::getName, Comparator.nullsFirst(Comparator.naturalOrder()))
+						.thenComparing(ObjectVO::getAge, Comparator.nullsFirst(Comparator.naturalOrder())).reversed())
 				.forEach(System.out::println);
 		System.out.println();
 	}
 	
 	static class ObjectVO {
 		private String name;
-		private int age;
+		private Integer age;
 
-		public ObjectVO(String name, int age) {
+		public ObjectVO(String name, Integer age) {
 			super();
 			this.name = name;
 			this.age = age;
@@ -64,11 +72,11 @@ public class StreamSortExample {
 			this.name = name;
 		}
 
-		public int getAge() {
+		public Integer getAge() {
 			return age;
 		}
 
-		public void setAge(int age) {
+		public void setAge(Integer age) {
 			this.age = age;
 		}
 
