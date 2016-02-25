@@ -15,7 +15,7 @@ public class EnumsAsParamsExample {
 	}
 
 	public void method2(Enum<?> e) {
-		System.out.println("method2(Enum): " + e);
+		System.out.println("method2(Enum): " + e.name());
 	}
 
 	public static void main(String[] args) {
