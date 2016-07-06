@@ -14,6 +14,10 @@ public class NetworkInterfaceInfo {
 				.getNetworkInterfaces(); nics.hasMoreElements();) {
 			NetworkInterface ifc = nics.nextElement();
 			
+			if(!ifc.isUp()) {
+				continue;
+			}
+			
 			System.out.println("Found interface: " + ifc.getDisplayName());
 			
 			for (Enumeration<InetAddress> ias = ifc.getInetAddresses(); ias.hasMoreElements();) {
