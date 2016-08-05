@@ -1,5 +1,6 @@
 package test.util;
 
+import java.io.File;
 import java.util.Optional;
 
 class Computer {
@@ -81,5 +82,18 @@ public class OptionalExample {
                 .orElse("UNKNOWN");
 		
 		System.out.println(version2);
+		
+		Optional<Computer> computer3 = Optional.ofNullable(null);
+		String version3 = computer3.flatMap(Computer::getSoundcard)
+                .flatMap(Soundcard::getUSB)
+                .map(USB::getVersion)
+                .orElse("UNKNOWN");
+		
+		System.out.println(version3);
+		
+		Optional<File> file = Optional.ofNullable(null);
+		Optional<String> path = file.map(f -> f.getAbsoluteFile()).map(File::getAbsolutePath);
+		
+		System.out.println(path);
 	}
 }
