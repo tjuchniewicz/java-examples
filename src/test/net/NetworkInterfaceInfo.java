@@ -24,7 +24,7 @@ public class NetworkInterfaceInfo {
 				
 				InetAddress ia = ias.nextElement();
 				if (ia instanceof Inet4Address) {
-					System.out.println("   Found address: " + ia);	
+					System.out.println("   Found address: " + ia.getHostAddress());	
 					System.out.println("      isSiteLocalAddress: " + ia.isSiteLocalAddress());	
 					System.out.println("      isLinkLocalAddress: " + ia.isLinkLocalAddress());	
 				}
